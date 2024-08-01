@@ -94,8 +94,11 @@ WORKDIR "/app"
 #     && unzip chromedriver-linux64.zip \
 #     && mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
 
+# You will need to update this as new versions of Chrome are released
+# Easiest way is to get the version of Chrome installed by google-chrome-stable_current_amd64.deb
+# and replace the version in the URL below
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && wget https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip \
+    && wget https://storage.googleapis.com/chrome-for-testing-public/127.0.6533.88/linux64/chromedriver-linux64.zip \
     && apt-get update -y \
     && apt install -y ./google-chrome-stable_current_amd64.deb \
     && unzip chromedriver-linux64.zip \

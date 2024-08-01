@@ -15,6 +15,12 @@ defmodule WPSWeb.Endpoint do
     websocket: [connect_info: [session: @session_options]],
     longpoll: [connect_info: [session: @session_options]]
 
+  # https://elixirforum.com/t/how-to-embed-a-liveview-via-iframe/65066
+  # Add new socket specifically for embedded pages. This socket will not
+  # Have access to session info, in particular won't be able to read information
+  # stored in session cookies such as CSRF token and logged in user token.
+  socket "/embed/live", Phoenix.LiveView.Socket, websocket: true, longpoll: true
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
