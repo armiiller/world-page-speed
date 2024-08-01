@@ -7,11 +7,12 @@
     <.live_title suffix=" | PagerTree">
       <%= assigns[:page_title] || "Ping Test Tool" %>
     </.live_title>
+    <link rel="icon" type="image/x-icon" href={~p"/favicon.ico"}>
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="flex h-full bg-black">
+  <body class="flex h-full bg-white">
     <%= @inner_content %>
   </body>
 </html>

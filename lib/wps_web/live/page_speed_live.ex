@@ -11,10 +11,10 @@ defmodule WPSWeb.PageSpeedLive do
   def render(assigns) do
     ~H"""
     <div class="py-8">
-      <h2 class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-        Ping Test Tool
+      <h2 class="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-black sm:text-4xl">
+        Check your website now!
       </h2>
-      <p :if={!@ref} class="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-gray-300">
+      <p :if={!@ref} class="mx-auto mt-2 max-w-xl text-center text-lg leading-8 text-gray-700">
         Measure your website's performance around the globe!
       </p>
       <div class="space-y-5">
@@ -32,34 +32,36 @@ defmodule WPSWeb.PageSpeedLive do
             type="text"
             value={@form[:url].value}
             required
-            class="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-white sm:text-md sm:leading-6 disabled:opacity-80"
+            class="min-w-0 flex-auto rounded-md border-0 bg-black/5 px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-blue/10 focus:ring-2 focus:ring-inset focus:ring-blue sm:text-md sm:leading-6 disabled:opacity-80"
             placeholder="Enter your URL"
             disabled={!!@ref}
             phx-mounted={JS.focus()}
           />
           <button
             type="submit"
-            class="flex-none rounded-md bg-white px-3.5 py-2.5 text-md font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:bg-gray-400"
+            class="flex-none rounded-md bg-black px-3.5 py-2.5 text-md font-semibold text-gray-100 shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue disabled:bg-gray-400"
             disabled={!!@ref}
           >
             Go!
           </button>
         </form>
 
-        <div class="mt-10 divide-y divide-white/5">
+        <div :if={!@ref} class="mx-auto border-b border-gray-300"></div>
+
+        <div class="mt-10 divide-y divide-black/5">
           <div :if={@ref} class="flex items-center justify-center gap-x-6">
-            <a href={@uri} class="text-lg font-semibold leading-6 text-white">
-              Results for <span class="text-gray-300 font-normal"><%= @uri %></span>
+            <a href={@uri} class="text-lg font-semibold leading-6 text-black" target="_blank">
+              Results for <span class="text-gray-600 font-normal"><%= @uri %></span>
               <span aria-hidden="true">→</span>
             </a>
             <button
               phx-click="reset"
-              class="flex-none rounded-md bg-white px-3.5 py-2 text-md font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:bg-gray-400"
+              class="flex-none rounded-md bg-black px-3.5 py-2.5 text-md font-semibold text-gray-100 shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue disabled:bg-gray-400"
             >
               Reset
             </button>
           </div>
-          <ul id="timings" phx-update="stream" role="list" class="mt-10 divide-y divide-white/5">
+          <ul id="timings" phx-update="stream" role="list" class="mt-10 divide-y divide-black/5">
             <li
               :for={{id, timing} <- @streams.timings}
               id={id}
@@ -69,7 +71,7 @@ defmodule WPSWeb.PageSpeedLive do
                 <div class="flex items-center gap-x-3">
                   <div
                     :if={timing.status in [:loading, :awaiting_session]}
-                    class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/15 animate animate-pulse"
+                    class="flex-none rounded-full p-1 text-gray-500 bg-gray-900/15 animate animate-pulse"
                   >
                     <div class="h-3 w-3 rounded-full bg-current"></div>
                   </div>
@@ -88,25 +90,25 @@ defmodule WPSWeb.PageSpeedLive do
                   >
                     <div class="h-3 w-3 rounded-full bg-current"></div>
                   </div>
-                  <h2 class="min-w-0 text-md font-semibold leading-6 text-white">
+                  <h2 class="min-w-0 text-md font-semibold leading-6 text-black">
                     <span class="flex gap-x-2">
                       <span class="truncate"><%= region_text(timing.region) %></span>
-                      <span class="text-gray-400 hidden md:block">
+                      <span class="text-gray-600 hidden md:block">
                         <.icon name="hero-paper-airplane" class="w-5 h-5" />
                       </span>
-                      <span class="whitespace-nowrap font-normal text-gray-300 hidden md:block">
+                      <span class="whitespace-nowrap font-normal text-gray-600 hidden md:block">
                         <%= URI.parse(timing.browser_url).host %>
                       </span>
                       <span class="absolute inset-0"></span>
                     </span>
                   </h2>
                 </div>
-                <div class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
+                <div class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-600">
                   <p class="truncate"><%= status_text(timing) %></p>
                   <svg
                     :if={timing.status == :complete}
                     viewBox="0 0 2 2"
-                    class="h-0.5 w-0.5 flex-none fill-gray-300"
+                    class="h-0.5 w-0.5 flex-none fill-gray-600"
                   >
                     <circle cx="1" cy="1" r="1" />
                   </svg>
@@ -119,7 +121,7 @@ defmodule WPSWeb.PageSpeedLive do
                   <svg
                     :if={timing.status == :complete}
                     viewBox="0 0 2 2"
-                    class="h-0.5 w-0.5 flex-none fill-gray-300"
+                    class="h-0.5 w-0.5 flex-none fill-gray-600"
                   >
                     <circle cx="1" cy="1" r="1" />
                   </svg>
