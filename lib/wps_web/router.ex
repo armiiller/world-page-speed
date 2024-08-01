@@ -9,7 +9,7 @@ defmodule WPSWeb.Router do
     |> delete_resp_header("x-frame-options")
     |> put_resp_header(
       "content-security-policy",
-      "frame-ancestors 'self' https://pagertree.com https://pagertree-1.ngrok.io" # Add your list of allowed domain(s) here
+      "frame-ancestors 'self' https://pagertree.com https://pagertree-1.ngrok.io https://app.umso.com" # Add your list of allowed domain(s) here
     )
   end
 
