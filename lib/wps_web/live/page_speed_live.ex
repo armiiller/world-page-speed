@@ -149,6 +149,12 @@ defmodule WPSWeb.PageSpeedLive do
         </div>
       </div>
 
+      <div>
+        <p class="mx-auto mt-4 max-w-2xl text-center text-sm text-gray-400">
+        ⚡Powered by <a href="https://pagertree.com/" target="_blank" class="text-blue-600">PagerTree</a>
+        </p>
+      </div>
+
     </div>
     """
   end
